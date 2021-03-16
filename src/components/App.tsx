@@ -1,14 +1,16 @@
 import React from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
+
 import Header from './Header';
-import ListTabs from './ListTabs';
-import ListView from './ListView';
+import Routes from './Routes';
 
 const App: React.FC = () => {
   return (
     <div>
-      <Header />
-      <ListTabs />
-      <ListView />
+      <Router>
+        <Header />
+        <Routes />
+      </Router>
     </div>
   )
 }

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import ListAdd from './ListAdd';
+import ListTabsItem from './ListTabsItem';
 
 const MOCK = {
   'list-1': {
@@ -34,7 +36,7 @@ const ListTabs: React.FC = () => {
   return (
     <>
       <ul>
-        {todoLists.map(l => <li key={l.id}>{l.name}</li>)}
+        {todoLists.map(l => <li key={l.id}><ListTabsItem {...l} /></li>)}
         <ListAdd />
       </ul>
     </>
