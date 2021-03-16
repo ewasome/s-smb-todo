@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useInputWithValidation from '../hooks/useInputWithValidation';
 
-const TodoAdd: React.FC = () => {
-  const [name, onChange] = useState('');
+const TodoAdd: React.FC = ({ validator }) => {
+  const [name, validation = {}, onChange] = useInputWithValidation(validator);
+  const { valid, msg } = validation;
 
   return (
     <div>
       <form>
-        <input type="text" value={name} onChange={e => onChange(e.target.value)} />
-        <button type="button" onClick={() => { }}>ADD LIST</button>
+        <input type="text" value={name} onChange={onChange} />
+        <button type="button" disabled={!valid} onClick={() => { }}>ADD LIST</button>
+        {!!msg && <span>{msg}</span>}
       </form>
     </div>
   )

@@ -37,7 +37,23 @@ const ListTabs: React.FC = () => {
     <>
       <ul>
         {todoLists.map(l => <li key={l.id}><ListTabsItem {...l} /></li>)}
-        <ListAdd />
+        <ListAdd
+          validator={[
+            {
+              fc: v => v.length > 0,
+              msg: '',
+            },
+            {
+              fc: v => v.length < 100,
+              msg: "Let's make it shorter",
+            },
+            {
+              // very basic check if list name is in use, in real life code should be improved
+              fc: v => !todoLists.some(list => list.name === v),
+              msg: 'Seems you all like this list name very much, but please, use another',
+            },
+          ]}
+        />
       </ul>
     </>
   )
