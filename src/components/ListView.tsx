@@ -1,40 +1,26 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+
 import Todo from './Todo';
 import TodoAdd from './TodoAdd';
 
-const MOCK = {
-  'list-1': {
-    id: 'list-1',
-    name: 'List 1',
-    items: [
-      {
-        id: 'todo-1',
-        name: 'Todo 1',
-        assignee: 'user-id-1',
-        completed: true,
-      },
-      {
-        id: 'todo-2',
-        name: 'Todo 2',
-        assignee: 'user-id-1',
-        completed: true,
-      },
-      {
-        id: 'todo-3',
-        name: 'Todo 3',
-        assignee: 'user-id-1',
-        completed: true,
-      },
-    ],
-  },
-};
+import { useService } from '../hooks/useService';
+import { getTodosFromList } from '../services/todos';
 
 const ListView: React.FC = () => {
-  const list = MOCK['list-1'].items;
+  const { listId } = useParams();
+  const { data: list = [], isError, isLoading, fetch: refetch } = useService(getTodosFromList, { lazy: false, args: [listId] });
+
+  if (isLoading) {
+    return <span>loading...</span>;
+  }
+  if (isError) {
+    return <div>ups something went wrong, try again <button type="button" onClick={refetch}>fetch</button></div>
+  }
 
   return (
     <div>
-      <TodoAdd />
+      <TodoAdd onAdd={refetch} />
       <ul>
         {list.map((todo) => <li key={todo.id}><Todo /></li>)}
       </ul>

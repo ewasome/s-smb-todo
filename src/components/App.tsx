@@ -13,13 +13,13 @@ const App: React.FC = () => {
   const { data: userData = {}, isError, isLoading, fetch } = useService(getCurrentUser);
 
   const getComponent = () => {
-    if (isLoading) return <span>loading</span>;
-    if (isError) return (
-      <div>
-        ups, something went wrong
-        <button onClick={fetch}>fetch</button>
-      </div>
-    )
+    // if (isLoading) return <span>loading</span>;
+    // if (isError) return (
+    //   <div>
+    //     ups, something went wrong
+    //     <button onClick={fetch}>fetch</button>
+    //   </div>
+    // )
     return <Routes />;
   };
 
