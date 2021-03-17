@@ -1,7 +1,7 @@
 import React from 'react';
 
 import useInputWithValidation from '../hooks/useInputWithValidation';
-import { useLazyService } from '../hooks/useLazyService';
+import { useService } from '../hooks/useService';
 
 import { addTodoList } from '../services/todos';
 
@@ -9,7 +9,7 @@ const TodoAdd: React.FC = ({ onAdd, validator }) => {
   const [name, validation = {}, onChange] = useInputWithValidation(validator);
   const { valid, msg } = validation;
 
-  const { isError, isLoading = false, fetch: createList } = useLazyService(addTodoList, {
+  const { isError, isLoading = false, fetch: createList } = useService(addTodoList, {
     lazy: true,
     onCompleted: onAdd,
     args: [name],

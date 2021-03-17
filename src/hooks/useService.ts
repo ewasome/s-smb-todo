@@ -1,39 +1,39 @@
-import {
-  useState,
-  useEffect,
-  useCallback,
-} from 'react';
+import { useState, useEffect, useCallback } from "react";
+import { isFunction } from "lodash";
+
+import useMemoizedValue from './useMemoizedValue';
 
 export const useService = (service, options = {}) => {
-  const { lazy = false, onCompleted, args } = options;
-
+  const { lazy = false, onCompleted, args = [] } = options;
   const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(!lazy);
   const [isError, setIsError] = useState(false);
+
+  const memoArgs = useMemoizedValue(args);
+  const memoOnCompleted = useMemoizedValue(onCompleted);
 
   const fetchData = useCallback(async () => {
     setIsError(false);
     setIsLoading(true);
 
     try {
-      const a = args || [];
-      const result = await service(...a);
+      const result = await service(...(memoArgs ? memoArgs : []));
       setData(result);
       setIsError(false);
-      if (typeof onCompleted === 'function') {
-        onCompleted(result);
+      setIsLoading(false);
+      if (isFunction(memoOnCompleted)) {
+        memoOnCompleted(result);
       }
     } catch (error) {
       setIsError(true);
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
-  }, [args, onCompleted, service]);
+  }, [service, memoArgs, memoOnCompleted]);
 
   useEffect(() => {
     if (lazy) return;
     fetchData();
-  }, [fetchData, lazy]);
+  }, [lazy, fetchData]);
 
   return { data, isLoading, isError, fetch: fetchData };
 };
