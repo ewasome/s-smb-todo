@@ -39,10 +39,10 @@ export function removeTodoList(id) {
   }
 }
 
-export function getTodosFromList(listId) {
+export function getTodoList(listId) {
   try {
     const state = LS.get(STATE_KEY);
-    return Promise.resolve(state[listId].items);
+    return Promise.resolve(state[listId]);
   } catch (err) {
     return Promise.reject(err);
   }

@@ -17,6 +17,7 @@ export function useInputWithValidation(validators) {
 
   const onChange = (event) => {
     const { value } = event.target;
+    debugger
     const validatorList = [].concat(validators);
     const result = validate(value, validatorList);
 
