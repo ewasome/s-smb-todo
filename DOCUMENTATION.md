@@ -1,1 +1,5 @@
-You can document your choices here.
+### Added external dependencies
+The project uses three additional dependencies. These are:
+* [Prettier](https://prettier.io) - unified code formatting improves readability. I've added it to ensure the code conforms to one 'standard'. Run `npm run format` to perform formatting across the entire TypeScript codebase.
+* [lodash](https://lodash.com/) - a utility functions package. `isEqual` function is used in the application for deep comparison of JavaScript objects. I've decided to use it, since the subject of object deep comparison is a fairly complex one. Delegating such task to an external, well-tested library gave me more time to focus on application's logic.  
+* [ESLint](https://eslint.org/) - JavaScript linter that performs static code analysis and prevents many possible bugs and not optimal solutions. Better save than sorry ;)

@@ -69,8 +69,11 @@ interface ListTabsItem {
 }
 
 const ListTab: React.FC<ListTabsItem> = ({ id, name, onRemove }) => {
+  // currently displayed list 
   const { listId } = useParams<Record<string, string | undefined>>();
+  // history to be used to redirect on list removal
   const history = useHistory();
+  // get remove list action, set error state information on action
   const { isError, fetch: remove } = useService(removeTodoList, {
     lazy: true,
     args: [id],
@@ -82,6 +85,7 @@ const ListTab: React.FC<ListTabsItem> = ({ id, name, onRemove }) => {
     },
   });
 
+  // remove list handler
   const onClick = (e: React.MouseEvent) => {
     e.preventDefault();
     remove();
@@ -95,6 +99,7 @@ const ListTab: React.FC<ListTabsItem> = ({ id, name, onRemove }) => {
           <img src={iconRemove} />
         </TabButton>
       </Tab>
+      {/* display failed remove action message */}
       {isError && (
         <FormMessage>
           ups, something went wrong, couldn&apos;t remove list

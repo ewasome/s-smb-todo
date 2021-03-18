@@ -11,11 +11,12 @@ import { UserContext } from "./context";
 import { LoadingIndicator, Message } from "./common";
 
 const App: React.FC = () => {
-  // add user data to global context as rarely changing data
+  // add user data to global context as both, rarely changing data and needed in many components
   const { data: userData = {}, isError, isLoading, fetch } = useService(
     getCurrentUser
   );
 
+  // display main app functionality only for known user 
   const getComponent = () => {
     if (isLoading) return <LoadingIndicator />;
     if (isError) return null;

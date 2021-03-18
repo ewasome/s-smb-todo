@@ -36,7 +36,7 @@ const Logo = styled.img`
 const Header: React.FC = () => {
   const user = useContext(UserContext) as User;
   const splitedName = user?.name?.split(" ");
-  // display only first name and title
+  // display 'logged in' user in form of first name and optional title
   const userDisplay = splitedName?.splice(0, splitedName.length - 1).join(" ");
   return (
     <Container>

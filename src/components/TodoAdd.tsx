@@ -50,13 +50,15 @@ const Textarea = styled.textarea`
 `;
 
 const VALIDATOR = [
+  // check for empty input
   {
     fn: (v: string) => v.length > 0,
     msg: "",
   },
+  // check for too long text
   {
     fn: (v: string) => v.length < 200,
-    msg: "Whoah, your task is too long",
+    msg: "Whoah, your task description is too long",
   },
 ];
 
@@ -65,12 +67,16 @@ interface TodoAddProps {
 }
 
 const TodoAdd: React.FC<TodoAddProps> = ({ onAdd }) => {
+  // set input value and validation state, get onChange handler
   const [text, setText, validation] = useInputWithValidation(VALIDATOR);
   const { valid, msg } = validation;
 
+  // currently displayed list 
   const { listId } = useParams<Record<string, string | undefined>>();
+  // currently 'logged in' user
   const { id: userId } = useContext(UserContext) as User;
 
+  // get create todo action, set loading/error state information on action
   const { isError, isLoading, fetch: createTodo } = useService(addTodo, {
     lazy: true,
     onCompleted: ({ id }) => {
@@ -80,6 +86,7 @@ const TodoAdd: React.FC<TodoAddProps> = ({ onAdd }) => {
     args: [text, listId, userId],
   });
 
+  // input change handler
   const onInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
@@ -100,7 +107,9 @@ const TodoAdd: React.FC<TodoAddProps> = ({ onAdd }) => {
           add todo
         </Button>
       </Form>
+      {/* display failed validation message */}
       {!!msg && <FormMessage>{msg}</FormMessage>}
+      {/* display failed create action message */}
       {isError && (
         <FormMessage>
           something went wrong, couldn&apos;t create todo

@@ -45,7 +45,9 @@ const TodoAddWrapper = styled.div`
 `;
 
 const ListView: React.FC = () => {
+  // currently displayed list 
   const { listId } = useParams<Record<string, string | undefined>>();
+  // get and save already added todos in list, set loading/error state information
   const {
     data: list = {},
     isError,
@@ -54,7 +56,7 @@ const ListView: React.FC = () => {
   } = useService(getTodoList, { lazy: false, args: [listId] });
   const { items, id } = list;
 
-  // if there is no such list in store
+  // don't show components when no existing list is selected
   if (!listId || (!isLoading && !id)) {
     return null;
   }
@@ -65,6 +67,7 @@ const ListView: React.FC = () => {
 
   return (
     <>
+      {/* display failed fetch todos message */}
       <Message
         show={isError}
         message="ups, something went wrong, couldn't get list of todos"

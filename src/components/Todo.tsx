@@ -114,33 +114,38 @@ interface TodoProps {
 }
 
 const Todo: React.FC<TodoProps> = ({ listId, id, details, onRemove }) => {
+  // get 'logged in' user to highlight todos assigned to them
   const { id: userId } = useContext(UserContext) as User;
 
+  // get change todo complete status action, set error state information on action
   const {
     data = details,
     isError: isErrorOnStatusChange,
     fetch: changeStatus,
   } = useService(toggleTodoStatus, { lazy: true, args: [id, listId] });
-
   const { description, assignee, completed } = data;
 
+  // get remove todo action, set error state information on action
   const { isError: isErrorOnRemove, fetch: remove } = useService(removeTodo, {
     lazy: true,
     args: [id, listId],
     onCompleted: onRemove,
   });
 
+  // get more details about assigned user, set loading/error state information
   const {
     data: user = {},
     isError: isErrorOnUser,
     isLoading: isLoadingOnUser,
   } = useService(getUserDetails, { lazy: false, args: [assignee] });
 
+  // initials to be used for avatar
   const displayAuthor = user?.name
     ?.split(" ")
     .map((part: string) => part.charAt(0))
     .join("");
 
+  // wait for user data to prevent ui change
   if (isLoadingOnUser) {
     return null;
   }
@@ -158,11 +163,13 @@ const Todo: React.FC<TodoProps> = ({ listId, id, details, onRemove }) => {
         </RemoveButton>
         {!isErrorOnUser && <AuthorAvatar>{displayAuthor}</AuthorAvatar>}
       </TodoContainer>
+      {/* display failed remove action message */}
       {isErrorOnRemove && (
         <FormMessage>
           something went wrong, couldn&apos;t remove Todo
         </FormMessage>
       )}
+      {/* display failed change status action message */}
       {isErrorOnStatusChange && (
         <FormMessage>
           something went wrong, couldn&apos;t change Todo status

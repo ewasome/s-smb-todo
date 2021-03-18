@@ -3,7 +3,7 @@ import { v4 as generateId } from "uuid";
 
 const STATE_KEY = "app.state";
 
-// Local storage API in Promise format to reflect real connection with backend
+// local storage API in Promise format to fake real connection with backend
 
 export function getTodoLists(): Promise<Pick<List, "id" | "name">[]> {
   try {

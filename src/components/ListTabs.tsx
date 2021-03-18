@@ -42,13 +42,18 @@ interface getTodoListsResponse {
 }
 
 const ListTabs: React.FC = () => {
+  // get and save already added lists, set loading/error state information
   const {
     data: todoLists = [],
     isError,
     isLoading,
     fetch: refetch,
   } = useService(getTodoLists) as getTodoListsResponse;
+
+  // history to be used to redirect to newly created list
   const history = useHistory();
+
+  // currently displayed list 
   const { listId } = useParams<Record<string, string | undefined>>();
 
   const formAdd = (
@@ -58,10 +63,12 @@ const ListTabs: React.FC = () => {
         history.push(`/list/${id}`);
       }}
       validator={[
+        // check for empty input
         {
           fn: (v) => v.length > 0,
           msg: "",
         },
+        // check for too long text
         {
           fn: (v) => v.length < 50,
           msg: "Let's make it shorter",
@@ -75,6 +82,7 @@ const ListTabs: React.FC = () => {
     />
   );
 
+  // default view when there is no list created
   if (!isLoading && !isError && !todoLists.length) {
     return (
       <Hero
@@ -87,6 +95,7 @@ const ListTabs: React.FC = () => {
   }
   return (
     <>
+    {/* display failed fetch list message */}
       <Message
         show={isError}
         message="ups, something went wrong, couldn't get list"
@@ -104,6 +113,7 @@ const ListTabs: React.FC = () => {
           ))}
         <li>{formAdd}</li>
       </Tabs>
+      {/* if no existing list is selected, inform banner to select one */}
       {!isLoading && !todoLists.some((list) => list.id === listId) && (
         <Banner
           text="Select list to add new items"

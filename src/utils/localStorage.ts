@@ -1,3 +1,4 @@
+// local storage management helpers
 export function getFromStorage(key: string): AppState {
   return JSON.parse(localStorage.getItem(key) || "{}");
 }

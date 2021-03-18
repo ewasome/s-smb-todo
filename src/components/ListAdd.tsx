@@ -40,9 +40,11 @@ interface ListAddProps {
 }
 
 const ListAdd: React.FC<ListAddProps> = ({ onAdd, validator }) => {
+  // set input value and validation state, get onChange handler
   const [name, setName, validation] = useInputWithValidation(validator);
   const { valid, msg } = validation;
 
+  // get create list action, set loading/error state information on action
   const { isError, isLoading, fetch: createList } = useService(addTodoList, {
     lazy: true,
     onCompleted: ({ id }) => {
@@ -52,11 +54,13 @@ const ListAdd: React.FC<ListAddProps> = ({ onAdd, validator }) => {
     args: [name],
   });
 
+  // create new list handler
   const onClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
     createList();
   };
 
+  // input change handler
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
@@ -79,7 +83,9 @@ const ListAdd: React.FC<ListAddProps> = ({ onAdd, validator }) => {
           add
         </StyledButton>
       </Form>
+      {/* display failed validation message */}
       {!!msg && <FormMessage>{msg}</FormMessage>}
+      {/* display failed create action message */}
       {!!isError && (
         <FormMessage>
           ups, something went wrong, couldn&apos;t create list
