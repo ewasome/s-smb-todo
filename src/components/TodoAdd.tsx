@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import breakpoints from "../styles/breakpoints";
 
-import useInputWithValidation from "../hooks/useInputWithValidation";
+import useInputWithValidation from "../hooks/useStateWithValidation";
 import { useService } from "../hooks/useService";
 import { addTodo } from "../services/todos";
 
@@ -51,43 +51,60 @@ const Textarea = styled.textarea`
 
 const VALIDATOR = [
   {
-    fc: (v) => v.length > 0,
+    fn: (v: string) => v.length > 0,
     msg: "",
   },
   {
-    fc: (v) => v.length < 200,
+    fn: (v: string) => v.length < 200,
     msg: "Whoah, your task is too long",
   },
 ];
 
-const TodoAdd: React.FC = ({ onAdd }) => {
-  const [text, validation = {}, onChange] = useInputWithValidation(VALIDATOR);
+interface TodoAddProps {
+  onAdd(...args: any): any;
+}
+
+const TodoAdd: React.FC<TodoAddProps> = ({ onAdd }) => {
+  const [text, setText, validation] = useInputWithValidation(VALIDATOR);
   const { valid, msg } = validation;
 
-  const { listId } = useParams();
-  const { id: userId } = useContext(UserContext);
+  const { listId } = useParams<Record<string, string | undefined>>();
+  const { id: userId } = useContext(UserContext) as User;
 
   const { isError, isLoading, fetch: createTodo } = useService(addTodo, {
     lazy: true,
-    onCompleted: onAdd,
+    onCompleted: ({ id }) => {
+      onAdd(id);
+      setText("");
+    },
     args: [text, listId, userId],
   });
+
+  const onInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value);
+  };
 
   return (
     <div>
       <Form>
         <Textarea
           value={text}
-          onChange={onChange}
+          onChange={onInputChange}
           placeholder="Create new todo"
         />
-        <Button type="button" disabled={!valid} onClick={createTodo}>
+        <Button
+          type="button"
+          disabled={!valid && !isLoading}
+          onClick={createTodo}
+        >
           add todo
         </Button>
       </Form>
       {!!msg && <FormMessage>{msg}</FormMessage>}
       {isError && (
-        <FormMessage>something went wrong, couldn't create todo</FormMessage>
+        <FormMessage>
+          something went wrong, couldn&apos;t create todo
+        </FormMessage>
       )}
     </div>
   );

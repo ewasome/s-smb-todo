@@ -1,12 +1,12 @@
-export function getFromStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+export function getFromStorage(key: string): AppState {
+  return JSON.parse(localStorage.getItem(key) || "{}");
 }
 
-export function setInStorage(key, data) {
+export function setInStorage(key: string, data: AppState): void {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-export function updateStorage(key, data) {
+export function updateStorage(key: string, data: AppState): void {
   if (!Object.keys(data).length) {
     localStorage.removeItem(key);
   }

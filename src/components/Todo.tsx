@@ -9,7 +9,11 @@ import iconRemove from "url:../assets/icon-remove.svg";
 import { UserContext } from "./context";
 import { FormMessage } from "./common";
 
-const TodoContainer = styled.div`
+interface TodoContainerProps {
+  highlighted: boolean;
+}
+
+const TodoContainer = styled.div<TodoContainerProps>`
   width: auto;
   display: grid;
   grid-gap: 1rem;
@@ -53,7 +57,11 @@ const Text = styled.p`
   font-size: 0.9rem;
 `;
 
-const Checkbox = styled.div`
+interface CheckboxProps {
+  checked: boolean;
+}
+
+const Checkbox = styled.div<CheckboxProps>`
 position: relative;
 display: flex;
 align-items: center;
@@ -98,8 +106,15 @@ span {
 }
 `;
 
-const Todo: React.FC = ({ listId, id, details, onRemove }) => {
-  const { id: userId } = useContext(UserContext);
+interface TodoProps {
+  listId: string;
+  id: string;
+  details: ToDo;
+  onRemove(): any;
+}
+
+const Todo: React.FC<TodoProps> = ({ listId, id, details, onRemove }) => {
+  const { id: userId } = useContext(UserContext) as User;
 
   const {
     data = details,
@@ -123,7 +138,7 @@ const Todo: React.FC = ({ listId, id, details, onRemove }) => {
 
   const displayAuthor = user?.name
     ?.split(" ")
-    .map((part) => part.charAt(0))
+    .map((part: string) => part.charAt(0))
     .join("");
 
   if (isLoadingOnUser) {
@@ -144,11 +159,13 @@ const Todo: React.FC = ({ listId, id, details, onRemove }) => {
         {!isErrorOnUser && <AuthorAvatar>{displayAuthor}</AuthorAvatar>}
       </TodoContainer>
       {isErrorOnRemove && (
-        <FormMessage>something went wrong, couldn't remove Todo</FormMessage>
+        <FormMessage>
+          something went wrong, couldn&apos;t remove Todo
+        </FormMessage>
       )}
       {isErrorOnStatusChange && (
         <FormMessage>
-          something went wrong, couldn't change Todo status
+          something went wrong, couldn&apos;t change Todo status
         </FormMessage>
       )}
     </>

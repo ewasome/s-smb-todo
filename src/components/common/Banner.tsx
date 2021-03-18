@@ -32,7 +32,18 @@ const Caption = styled.div`
   }
 `;
 
-const Banner: React.FC = ({ text, imageSrc, imageProps }) => {
+interface ImageProps {
+  alt: string;
+  [props: string]: any;
+}
+
+interface BannerProps {
+  text: string;
+  imageSrc: string;
+  imageProps?: ImageProps;
+}
+
+const Banner: React.FC<BannerProps> = ({ text, imageSrc, imageProps }) => {
   return (
     <div>
       {text && (

@@ -45,7 +45,7 @@ const TodoAddWrapper = styled.div`
 `;
 
 const ListView: React.FC = () => {
-  const { listId } = useParams();
+  const { listId } = useParams<Record<string, string | undefined>>();
   const {
     data: list = {},
     isError,
@@ -55,7 +55,7 @@ const ListView: React.FC = () => {
   const { items, id } = list;
 
   // if there is no such list in store
-  if (!isLoading && !id) {
+  if (!listId || (!isLoading && !id)) {
     return null;
   }
 
@@ -79,7 +79,7 @@ const ListView: React.FC = () => {
           <TodoAdd onAdd={refetch} />
         </TodoAddWrapper>
         <TodoList>
-          {items?.map((todo) => (
+          {items?.map((todo: ToDo) => (
             <li key={todo.id}>
               <Todo
                 onRemove={refetch}

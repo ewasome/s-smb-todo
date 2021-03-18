@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { isEqual } from "lodash";
 
 // deep comparison with previous value
-export function useMemoizedValue(value) {
-  const ref = useRef();
+export function useMemoizedValue(value: any): any {
+  const ref = useRef() as React.MutableRefObject<any>;
 
   if (!isEqual(value, ref.current)) {
     ref.current = value;

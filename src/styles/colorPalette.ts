@@ -1,4 +1,4 @@
-const colorPalette = {
+const colorPalette: ColorPalette = {
   "purple-0": "#f4eff5",
   "purple-1": "#ded1e0",
   "purple-2": "#4d194d",

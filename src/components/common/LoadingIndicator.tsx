@@ -25,7 +25,7 @@ const Rotate = styled.div`
   }
 `;
 
-const LoadingIndicator = () => {
+const LoadingIndicator: React.FC = () => {
   return (
     <Rotate>
       <span />

@@ -68,8 +68,14 @@ const HeroText = styled.div`
   }
 `;
 
+interface HeroProps {
+  subtitle: string;
+  text: string;
+  banner: React.ReactNode;
+  action: React.ReactNode;
+}
 
-const Hero: React.FC = ({ subtitle, text, banner, action }) => {
+const Hero: React.FC<HeroProps> = ({ subtitle, text, banner, action }) => {
   return (
     <HeroSection>
       <HeroText>

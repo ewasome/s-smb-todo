@@ -62,8 +62,14 @@ const TabButton = styled.button`
   }
 `;
 
-const ListTab: React.FC = ({ id, name, onRemove }) => {
-  const { listId } = useParams();
+interface ListTabsItem {
+  id: string;
+  name: string;
+  onRemove(): unknown;
+}
+
+const ListTab: React.FC<ListTabsItem> = ({ id, name, onRemove }) => {
+  const { listId } = useParams<Record<string, string | undefined>>();
   const history = useHistory();
   const { isError, fetch: remove } = useService(removeTodoList, {
     lazy: true,
@@ -76,7 +82,7 @@ const ListTab: React.FC = ({ id, name, onRemove }) => {
     },
   });
 
-  const onClick = (e) => {
+  const onClick = (e: React.MouseEvent) => {
     e.preventDefault();
     remove();
   };
@@ -91,7 +97,7 @@ const ListTab: React.FC = ({ id, name, onRemove }) => {
       </Tab>
       {isError && (
         <FormMessage>
-          ups, something went wrong, couldn't remove list
+          ups, something went wrong, couldn&apos;t remove list
         </FormMessage>
       )}
     </>

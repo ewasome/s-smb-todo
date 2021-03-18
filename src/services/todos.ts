@@ -1,9 +1,11 @@
 import LS from "../utils/localStorage";
-import { v4 as generateId } from 'uuid';
+import { v4 as generateId } from "uuid";
 
 const STATE_KEY = "app.state";
 
-export function getTodoLists() {
+// Local storage API in Promise format to reflect real connection with backend
+
+export function getTodoLists(): Promise<Pick<List, "id" | "name">[]> {
   try {
     const state = LS.get(STATE_KEY);
     const lists = Object.keys(state).map((list) => ({
@@ -17,7 +19,7 @@ export function getTodoLists() {
   }
 }
 
-export function addTodoList(name) {
+export function addTodoList(name: string): Promise<List> {
   try {
     const state = LS.get(STATE_KEY);
     const id = name.toLowerCase().trim().split(" ").join("-");
@@ -30,7 +32,7 @@ export function addTodoList(name) {
   }
 }
 
-export function removeTodoList(id) {
+export function removeTodoList(id: string): Promise<string> {
   try {
     const state = LS.get(STATE_KEY);
     const newState = Object.keys(state).reduce((acc, key) => {
@@ -44,7 +46,7 @@ export function removeTodoList(id) {
   }
 }
 
-export function getTodoList(listId) {
+export function getTodoList(listId: string): Promise<List> {
   try {
     const state = LS.get(STATE_KEY);
     return Promise.resolve(state[listId]);
@@ -53,7 +55,11 @@ export function getTodoList(listId) {
   }
 }
 
-export function addTodo(text, listId, assigneeId) {
+export function addTodo(
+  text: string,
+  listId: string,
+  assigneeId: number
+): Promise<ToDo> {
   try {
     const state = LS.get(STATE_KEY);
     const newItem = {
@@ -76,11 +82,14 @@ export function addTodo(text, listId, assigneeId) {
   }
 }
 
-export function toggleTodoStatus(id, listId) {
+export function toggleTodoStatus(id: string, listId: string): Promise<ToDo> {
   try {
     const state = LS.get(STATE_KEY);
     const items = state[listId].items;
     const item = items.find((item) => item.id === id);
+    if (!item) {
+      throw new Error(`Cannot find todo with id: ${id}`);
+    }
     const changedItem = { ...item, completed: !item.completed };
     const newItems = items.map((item) => (item.id === id ? changedItem : item));
     const newState = {
@@ -95,7 +104,7 @@ export function toggleTodoStatus(id, listId) {
   }
 }
 
-export function removeTodo(id, listId) {
+export function removeTodo(id: string, listId: string): Promise<string> {
   try {
     const state = LS.get(STATE_KEY);
     const items = state[listId].items;

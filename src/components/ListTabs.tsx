@@ -34,34 +34,41 @@ const Tabs = styled.ul`
   }
 `;
 
+interface getTodoListsResponse {
+  data: Pick<List, "id" | "name">[] | undefined;
+  isError: boolean;
+  isLoading: boolean;
+  fetch: () => any;
+}
+
 const ListTabs: React.FC = () => {
   const {
     data: todoLists = [],
     isError,
     isLoading,
     fetch: refetch,
-  } = useService(getTodoLists);
+  } = useService(getTodoLists) as getTodoListsResponse;
   const history = useHistory();
-  const { listId } = useParams();
+  const { listId } = useParams<Record<string, string | undefined>>();
 
   const formAdd = (
     <ListAdd
-      onAdd={({ id }) => {
+      onAdd={(id) => {
         refetch();
         history.push(`/list/${id}`);
       }}
       validator={[
         {
-          fc: (v) => v.length > 0,
+          fn: (v) => v.length > 0,
           msg: "",
         },
         {
-          fc: (v) => v.length < 100,
+          fn: (v) => v.length < 50,
           msg: "Let's make it shorter",
         },
         {
           // very basic check if list name is in use, in real life code should be improved
-          fc: (v) => !todoLists.some((list) => list.name === v),
+          fn: (v) => !todoLists.some((list) => list.name === v),
           msg: "List name already in use",
         },
       ]}

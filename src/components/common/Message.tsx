@@ -37,7 +37,18 @@ const Button = styled(StyledButton)`
   }
 `;
 
-const Message: React.FC = ({ show, message, action = {} }) => {
+interface Action {
+  txt: string;
+  fn(): any;
+}
+
+interface MessageProps {
+  show: boolean;
+  message: string;
+  action?: Action;
+}
+
+const Message: React.FC<MessageProps> = ({ show, message, action = {} }) => {
   if (!show) {
     return null;
   }

@@ -3,9 +3,12 @@ import { isFunction } from "lodash";
 
 import useMemoizedValue from "./useMemoizedValue";
 
-export const useService = (service, options = {}) => {
+export const useService = (
+  service: (...args: any[]) => Promise<any>,
+  options: DataServiceOptions = {}
+): any => {
   const { lazy = false, onCompleted, args = [] } = options;
-  const [data, setData] = useState();
+  const [data, setData] = useState<any>();
   const [isLoading, setIsLoading] = useState(!lazy);
   const [isError, setIsError] = useState(false);
 
@@ -25,6 +28,7 @@ export const useService = (service, options = {}) => {
         memoOnCompleted(result);
       }
     } catch (error) {
+      console.error(error);
       setIsError(true);
       setIsLoading(false);
     }

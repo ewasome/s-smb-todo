@@ -34,7 +34,7 @@ const Logo = styled.img`
 `;
 
 const Header: React.FC = () => {
-  const user = useContext(UserContext);
+  const user = useContext(UserContext) as User;
   const splitedName = user?.name?.split(" ");
   // display only first name and title
   const userDisplay = splitedName?.splice(0, splitedName.length - 1).join(" ");
@@ -43,7 +43,7 @@ const Header: React.FC = () => {
       <Link to="/">
         <Logo src={logo} />
       </Link>
-      {/* display only if user data are retrieved */}
+      {/* display only if user data is retrieved */}
       {userDisplay && <span>Hello {userDisplay}</span>}
     </Container>
   );

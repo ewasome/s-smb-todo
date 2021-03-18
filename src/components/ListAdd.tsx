@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import breakpoints from "../styles/breakpoints";
 
-import useInputWithValidation from "../hooks/useInputWithValidation";
+import useInputWithValidation from "../hooks/useStateWithValidation";
 import { useService } from "../hooks/useService";
 import { addTodoList } from "../services/todos";
 
@@ -34,19 +34,31 @@ const FormInput = styled.input`
   }
 `;
 
-const ListAdd: React.FC = ({ onAdd, validator }) => {
-  const [name, validation = {}, onChange] = useInputWithValidation(validator);
+interface ListAddProps {
+  onAdd(...args: unknown[]): unknown;
+  validator: InputValidator[];
+}
+
+const ListAdd: React.FC<ListAddProps> = ({ onAdd, validator }) => {
+  const [name, setName, validation] = useInputWithValidation(validator);
   const { valid, msg } = validation;
 
   const { isError, isLoading, fetch: createList } = useService(addTodoList, {
     lazy: true,
-    onCompleted: onAdd,
+    onCompleted: ({ id }) => {
+      onAdd(id);
+      setName("");
+    },
     args: [name],
   });
 
-  const onClick = (e) => {
+  const onClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
     createList();
+  };
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
   };
 
   return (
@@ -56,7 +68,7 @@ const ListAdd: React.FC = ({ onAdd, validator }) => {
           placeholder="Create new list"
           type="text"
           value={name}
-          onChange={onChange}
+          onChange={onInputChange}
         />
         <StyledButton
           type="submit"
@@ -70,7 +82,7 @@ const ListAdd: React.FC = ({ onAdd, validator }) => {
       {!!msg && <FormMessage>{msg}</FormMessage>}
       {!!isError && (
         <FormMessage>
-          ups, something went wrong, couldn't create list
+          ups, something went wrong, couldn&apos;t create list
         </FormMessage>
       )}
     </div>
