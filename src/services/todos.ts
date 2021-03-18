@@ -1,4 +1,6 @@
 import LS from "../utils/localStorage";
+import { v4 as generateId } from 'uuid';
+
 const STATE_KEY = "app.state";
 
 export function getTodoLists() {
@@ -54,9 +56,8 @@ export function getTodoList(listId) {
 export function addTodo(text, listId, assigneeId) {
   try {
     const state = LS.get(STATE_KEY);
-    // TODO: generate id
     const newItem = {
-      id: text,
+      id: generateId(),
       description: text,
       assignee: assigneeId,
       completed: false,
