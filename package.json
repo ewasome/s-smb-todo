@@ -6,7 +6,8 @@
     "start": "parcel serve public/index.html",
     "build": "parcel build public/index.html",
     "eslint": "eslint 'src/**/*{.js,.ts,.tsx}'",
-    "format": "prettier --write '**/*.{js,ts,tsx}'"
+    "format": "prettier --write '**/*.{js,ts,tsx}'",
+    "typecheck": "tsc --skipLibCheck --noEmit"
   },
   "keywords": [],
   "author": "",
