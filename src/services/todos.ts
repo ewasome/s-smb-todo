@@ -1,13 +1,13 @@
-import LS from "../utils/localStorage";
-import { v4 as generateId } from "uuid";
+import LS from '../utils/localStorage';
+import { v4 as generateId } from 'uuid';
 
 import { List, ToDo } from '../interfaces';
 
-const STATE_KEY = "app.state";
+const STATE_KEY = 'app.state';
 
 // local storage API in Promise format to fake real connection with backend
 
-export function getTodoLists(): Promise<Pick<List, "id" | "name">[]> {
+export function getTodoLists(): Promise<Pick<List, 'id' | 'name'>[]> {
   try {
     const state = LS.get(STATE_KEY);
     const lists = Object.keys(state).map((list) => ({
@@ -24,7 +24,7 @@ export function getTodoLists(): Promise<Pick<List, "id" | "name">[]> {
 export function addTodoList(name: string): Promise<List> {
   try {
     const state = LS.get(STATE_KEY);
-    const id = name.toLowerCase().trim().split(" ").join("-");
+    const id = name.toLowerCase().trim().split(' ').join('-');
     const newList = { id, name, items: [] };
     LS.set(STATE_KEY, { ...state, [id]: newList });
 

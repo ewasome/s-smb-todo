@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import breakpoints from "../../styles/breakpoints";
+import breakpoints from '../../styles/breakpoints';
 
 const ImageWrapper = styled.div`
   display: none;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 import { InputValidator, UseStateWithValidationResult } from '../interfaces';
 
@@ -17,9 +17,9 @@ export function useStateWithValidation(
   validators: InputValidator[]
 ): UseStateWithValidationResult {
   // set input value and validation state
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState<boolean | null>(null);
-  const [validationFailureMsg, setValidationFailureMsg] = useState("");
+  const [validationFailureMsg, setValidationFailureMsg] = useState('');
 
   const onChange = (value: string) => {
     // unify validator value as array
@@ -32,7 +32,7 @@ export function useStateWithValidation(
     // validation failure handling
     if (!result) {
       setIsValid(true);
-      setValidationFailureMsg("");
+      setValidationFailureMsg('');
       return;
     }
 

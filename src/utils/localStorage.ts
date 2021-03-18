@@ -2,7 +2,7 @@ import { AppState } from '../interfaces';
 
 // local storage management helpers
 export function getFromStorage(key: string): AppState {
-  return JSON.parse(localStorage.getItem(key) || "{}");
+  return JSON.parse(localStorage.getItem(key) || '{}');
 }
 
 export function setInStorage(key: string, data: AppState): void {

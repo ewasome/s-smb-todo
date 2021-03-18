@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import breakpoints from "../styles/breakpoints";
+import breakpoints from '../styles/breakpoints';
 
 import { InputValidator } from '../interfaces';
 
-import useInputWithValidation from "../hooks/useStateWithValidation";
-import { useService } from "../hooks/useService";
-import { addTodoList } from "../services/todos";
+import useInputWithValidation from '../hooks/useStateWithValidation';
+import { useService } from '../hooks/useService';
+import { addTodoList } from '../services/todos';
 
-import { StyledButton, FormMessage } from "./common";
+import { StyledButton, FormMessage } from './common';
 
 const Form = styled.form`
   width: 100%;
@@ -51,7 +51,7 @@ const ListAdd: React.FC<ListAddProps> = ({ onAdd, validator }) => {
     lazy: true,
     onCompleted: ({ id }) => {
       onAdd(id);
-      setName("");
+      setName('');
     },
     args: [name],
   });

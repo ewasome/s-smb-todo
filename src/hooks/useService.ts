@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
-import { isFunction } from "lodash";
+import { useState, useEffect, useCallback } from 'react';
+import { isFunction } from 'lodash';
 
 import { DataServiceOptions } from '../interfaces';
 
-import useMemoizedValue from "./useMemoizedValue";
+import useMemoizedValue from './useMemoizedValue';
 
 // loaded data getter, load action trigger adapter to unify different API calls
 export const useService = (

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { Hero, StyledLink } from "./common";
-import banner from "url:../assets/not-found.svg";
+import { Hero, StyledLink } from './common';
+import banner from '../assets/not-found.svg';
 
 const NotFound: React.FC = () => {
   return (

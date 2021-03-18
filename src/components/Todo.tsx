@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
-import styled from "styled-components";
+import React, { useContext } from 'react';
+import styled from 'styled-components';
 
 import { ToDo, User } from '../interfaces';
 
-import { toggleTodoStatus, removeTodo } from "../services/todos";
-import { getUserDetails } from "../services/users";
-import { useService } from "../hooks/useService";
+import { toggleTodoStatus, removeTodo } from '../services/todos';
+import { getUserDetails } from '../services/users';
+import { useService } from '../hooks/useService';
 
-import iconRemove from "url:../assets/icon-remove.svg";
-import { UserContext } from "./context";
-import { FormMessage } from "./common";
+import iconRemove from '../assets/icon-remove.svg';
+import { UserContext } from './context';
+import { FormMessage } from './common';
 
 interface TodoContainerProps {
   highlighted: boolean;
@@ -22,7 +22,7 @@ const TodoContainer = styled.div<TodoContainerProps>`
   grid-template-columns: auto 1fr auto;
   box-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px 0 #0000000f;
   background-color: ${(props) =>
-    props.highlighted ? "var(--color-purple-0)" : "var(--color-white)"};
+    props.highlighted ? 'var(--color-purple-0)' : 'var(--color-white)'};
   border-color: #e5e7eb;
   border-radius: 8px;
   padding: 24px;
@@ -102,7 +102,7 @@ span {
     position: absolute;
     font-size: 22px;
     width: 100%;
-    opacity: ${(props) => (props.checked ? "1" : "0")};
+    opacity: ${(props) => (props.checked ? '1' : '0')};
   }
   }
 }
@@ -143,9 +143,9 @@ const Todo: React.FC<TodoProps> = ({ listId, id, details, onRemove }) => {
 
   // initials to be used for avatar
   const displayAuthor = user?.name
-    ?.split(" ")
+    ?.split(' ')
     .map((part: string) => part.charAt(0))
-    .join("");
+    .join('');
 
   // wait for user data to prevent ui change
   if (isLoadingOnUser) {

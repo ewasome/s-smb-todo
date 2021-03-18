@@ -1,17 +1,17 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { ToDo } from '../interfaces';
 
-import breakpoints from "../styles/breakpoints";
+import breakpoints from '../styles/breakpoints';
 
-import Todo from "./Todo";
-import TodoAdd from "./TodoAdd";
-import { LoadingIndicator, Message } from "./common";
+import Todo from './Todo';
+import TodoAdd from './TodoAdd';
+import { LoadingIndicator, Message } from './common';
 
-import { useService } from "../hooks/useService";
-import { getTodoList } from "../services/todos";
+import { useService } from '../hooks/useService';
+import { getTodoList } from '../services/todos';
 
 const Main = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const TodoAddWrapper = styled.div`
 `;
 
 const ListView: React.FC = () => {
-  // currently displayed list 
+  // currently displayed list
   const { listId } = useParams<Record<string, string | undefined>>();
   // get and save already added todos in list, set loading/error state information
   const {
@@ -74,7 +74,7 @@ const ListView: React.FC = () => {
         show={isError}
         message="ups, something went wrong, couldn't get list of todos"
         action={{
-          txt: "Retry",
+          txt: 'Retry',
           fn: refetch,
         }}
       />

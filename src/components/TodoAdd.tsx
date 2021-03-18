@@ -1,17 +1,17 @@
-import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { User } from '../interfaces';
 
-import breakpoints from "../styles/breakpoints";
+import breakpoints from '../styles/breakpoints';
 
-import useInputWithValidation from "../hooks/useStateWithValidation";
-import { useService } from "../hooks/useService";
-import { addTodo } from "../services/todos";
+import useInputWithValidation from '../hooks/useStateWithValidation';
+import { useService } from '../hooks/useService';
+import { addTodo } from '../services/todos';
 
-import { StyledButton, FormMessage } from "./common";
-import { UserContext } from "./context";
+import { StyledButton, FormMessage } from './common';
+import { UserContext } from './context';
 
 const Form = styled.form`
   display: flex;
@@ -55,12 +55,12 @@ const VALIDATOR = [
   // check for empty input
   {
     fn: (v: string) => v.length > 0,
-    msg: "",
+    msg: '',
   },
   // check for too long text
   {
     fn: (v: string) => v.length < 200,
-    msg: "Whoah, your task description is too long",
+    msg: 'Whoah, your task description is too long',
   },
 ];
 
@@ -73,7 +73,7 @@ const TodoAdd: React.FC<TodoAddProps> = ({ onAdd }) => {
   const [text, setText, validation] = useInputWithValidation(VALIDATOR);
   const { valid, msg } = validation;
 
-  // currently displayed list 
+  // currently displayed list
   const { listId } = useParams<Record<string, string | undefined>>();
   // currently 'logged in' user
   const { id: userId } = useContext(UserContext) as User;
@@ -83,7 +83,7 @@ const TodoAdd: React.FC<TodoAddProps> = ({ onAdd }) => {
     lazy: true,
     onCompleted: ({ id }) => {
       onAdd(id);
-      setText("");
+      setText('');
     },
     args: [text, listId, userId],
   });

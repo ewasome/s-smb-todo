@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { isEqual } from "lodash";
+import { useRef } from 'react';
+import { isEqual } from 'lodash';
 
 // deep comparison with previous value
 export function useMemoizedValue(value: unknown): any {

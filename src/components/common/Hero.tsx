@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import breakpoints from "../../styles/breakpoints";
+import React from 'react';
+import styled from 'styled-components';
+import breakpoints from '../../styles/breakpoints';
 
 const HeroSection = styled.section`
   background-color: var(--color-white);

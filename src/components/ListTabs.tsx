@@ -1,19 +1,19 @@
-import React from "react";
-import { useHistory, useParams } from "react-router";
-import styled from "styled-components";
+import React from 'react';
+import { useHistory, useParams } from 'react-router';
+import styled from 'styled-components';
 
 import { List } from '../interfaces';
 
-import breakpoints from "../styles/breakpoints";
+import breakpoints from '../styles/breakpoints';
 
-import { Hero, Banner, Message } from "./common";
-import ListAdd from "./ListAdd";
-import ListTabsItem from "./ListTabsItem";
-import startListBanner from "url:../assets/start-list.svg";
-import selectListBanner from "url:../assets/select-list.svg";
+import { Hero, Banner, Message } from './common';
+import ListAdd from './ListAdd';
+import ListTabsItem from './ListTabsItem';
+import startListBanner from '../assets/start-list.svg';
+import selectListBanner from '../assets/select-list.svg';
 
-import { useService } from "../hooks/useService";
-import { getTodoLists } from "../services/todos";
+import { useService } from '../hooks/useService';
+import { getTodoLists } from '../services/todos';
 
 const Tabs = styled.ul`
   list-style: none;
@@ -37,7 +37,7 @@ const Tabs = styled.ul`
 `;
 
 interface getTodoListsResponse {
-  data: Pick<List, "id" | "name">[] | undefined;
+  data: Pick<List, 'id' | 'name'>[] | undefined;
   isError: boolean;
   isLoading: boolean;
   fetch: () => any;
@@ -55,7 +55,7 @@ const ListTabs: React.FC = () => {
   // history to be used to redirect to newly created list
   const history = useHistory();
 
-  // currently displayed list 
+  // currently displayed list
   const { listId } = useParams<Record<string, string | undefined>>();
 
   const formAdd = (
@@ -68,7 +68,7 @@ const ListTabs: React.FC = () => {
         // check for empty input
         {
           fn: (v) => v.length > 0,
-          msg: "",
+          msg: '',
         },
         // check for too long text
         {
@@ -78,7 +78,7 @@ const ListTabs: React.FC = () => {
         {
           // very basic check if list name is in use, in real life code should be improved
           fn: (v) => !todoLists.some((list) => list.name === v),
-          msg: "List name already in use",
+          msg: 'List name already in use',
         },
       ]}
     />
@@ -102,7 +102,7 @@ const ListTabs: React.FC = () => {
         show={isError}
         message="ups, something went wrong, couldn't get list"
         action={{
-          txt: "Retry",
+          txt: 'Retry',
           fn: refetch,
         }}
       />

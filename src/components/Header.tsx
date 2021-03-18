@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { User } from '../interfaces';
 
-import breakpoints from "../styles/breakpoints";
+import breakpoints from '../styles/breakpoints';
 
-import logo from "url:../assets/logo.png";
-import { UserContext } from "./context";
+import logo from '../assets/logo.png';
+import { UserContext } from './context';
 
 const Container = styled.header`
   background-image: linear-gradient(
@@ -37,9 +37,9 @@ const Logo = styled.img`
 
 const Header: React.FC = () => {
   const user = useContext(UserContext) as User;
-  const splitedName = user?.name?.split(" ");
+  const splitedName = user?.name?.split(' ');
   // display 'logged in' user in form of first name and optional title
-  const userDisplay = splitedName?.splice(0, splitedName.length - 1).join(" ");
+  const userDisplay = splitedName?.splice(0, splitedName.length - 1).join(' ');
   return (
     <Container>
       <Link to="/">

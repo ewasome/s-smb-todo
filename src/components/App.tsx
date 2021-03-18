@@ -1,14 +1,14 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import GlobalStyle from "../styles/globalStyles";
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import GlobalStyle from '../styles/globalStyles';
 
-import Header from "./Header";
-import Routes from "./Routes";
+import Header from './Header';
+import Routes from './Routes';
 
-import useService from "../hooks/useService";
-import { getCurrentUser } from "../services/users";
-import { UserContext } from "./context";
-import { LoadingIndicator, Message } from "./common";
+import useService from '../hooks/useService';
+import { getCurrentUser } from '../services/users';
+import { UserContext } from './context';
+import { LoadingIndicator, Message } from './common';
 
 const App: React.FC = () => {
   // add user data to global context as both, rarely changing data and needed in many components
@@ -16,7 +16,7 @@ const App: React.FC = () => {
     getCurrentUser
   );
 
-  // display main app functionality only for known user 
+  // display main app functionality only for known user
   const getComponent = () => {
     if (isLoading) return <LoadingIndicator />;
     if (isError) return null;
@@ -33,7 +33,7 @@ const App: React.FC = () => {
             show={isError}
             message="ups, something went wrong, couldn't get user details"
             action={{
-              txt: "Retry",
+              txt: 'Retry',
               fn: fetch,
             }}
           />

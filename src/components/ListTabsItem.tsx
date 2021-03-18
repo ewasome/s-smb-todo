@@ -1,15 +1,15 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
-import { useParams, useHistory } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { useParams, useHistory } from 'react-router-dom';
 
-import breakpoints from "../styles/breakpoints";
+import breakpoints from '../styles/breakpoints';
 
-import { useService } from "../hooks/useService";
-import { removeTodoList } from "../services/todos";
+import { useService } from '../hooks/useService';
+import { removeTodoList } from '../services/todos';
 
-import iconRemove from "url:../assets/icon-remove.svg";
-import { FormMessage } from "./common";
+import iconRemove from '../assets/icon-remove.svg';
+import { FormMessage } from './common';
 
 const Tab = styled(NavLink)`
   display: flex;
@@ -69,7 +69,7 @@ interface ListTabsItem {
 }
 
 const ListTab: React.FC<ListTabsItem> = ({ id, name, onRemove }) => {
-  // currently displayed list 
+  // currently displayed list
   const { listId } = useParams<Record<string, string | undefined>>();
   // history to be used to redirect on list removal
   const history = useHistory();
@@ -80,7 +80,7 @@ const ListTab: React.FC<ListTabsItem> = ({ id, name, onRemove }) => {
     onCompleted: () => {
       onRemove();
       if (id === listId) {
-        history.push("/");
+        history.push('/');
       }
     },
   });

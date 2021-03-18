@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import breakpoints from "../../styles/breakpoints";
-import { StyledButton } from "./Action";
+import breakpoints from '../../styles/breakpoints';
+import { StyledButton } from './Action';
 
 const StyledMessage = styled.div`
   background-color: var(--color-blue-0);
