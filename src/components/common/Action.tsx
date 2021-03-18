@@ -24,8 +24,12 @@ line-height: 3.75rem;
 }
 `;
 
-export const StyledLink = styled(Link)`${styles}`;
-export const StyledButton = styled.button`${styles}`;
+export const StyledLink = styled(Link)`
+  ${styles}
+`;
+export const StyledButton = styled.button`
+  ${styles}
+`;
 
 export default {
   StyledLink,

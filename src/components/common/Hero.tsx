@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import breakpoints from '../../styles/breakpoints';
+import breakpoints from "../../styles/breakpoints";
 
 const HeroSection = styled.section`
   background-color: var(--color-white);
@@ -42,7 +42,7 @@ const HeroBanner = styled.div`
       height: 50vh;
     }
   }
-  `;
+`;
 
 const HeroText = styled.div`
   padding: 2rem;
@@ -68,9 +68,6 @@ const HeroText = styled.div`
   }
 `;
 
-const HeroAction = styled.div`
-  
-`;
 
 const Hero: React.FC = ({ subtitle, text, banner, action }) => {
   return (
@@ -78,14 +75,10 @@ const Hero: React.FC = ({ subtitle, text, banner, action }) => {
       <HeroText>
         <h3>{subtitle}</h3>
         <h1>{text}</h1>
-        <HeroAction>
-          {action}
-        </HeroAction>
+        <div>{action}</div>
       </HeroText>
       <HeroBannerContainer>
-        <HeroBanner>
-          {banner}
-        </HeroBanner>
+        <HeroBanner>{banner}</HeroBanner>
       </HeroBannerContainer>
     </HeroSection>
   );

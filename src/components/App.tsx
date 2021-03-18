@@ -1,18 +1,20 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import GlobalStyle from '../styles/globalStyles';
+import GlobalStyle from "../styles/globalStyles";
 
-import Header from './Header';
-import Routes from './Routes';
+import Header from "./Header";
+import Routes from "./Routes";
 
-import useService from '../hooks/useService';
-import { getCurrentUser } from '../services/users';
-import { UserContext } from './context';
-import { LoadingIndicator, Message } from './common';
+import useService from "../hooks/useService";
+import { getCurrentUser } from "../services/users";
+import { UserContext } from "./context";
+import { LoadingIndicator, Message } from "./common";
 
 const App: React.FC = () => {
   // add user data to global context as rarely changing data
-  const { data: userData = {}, isError, isLoading, fetch } = useService(getCurrentUser);
+  const { data: userData = {}, isError, isLoading, fetch } = useService(
+    getCurrentUser
+  );
 
   const getComponent = () => {
     if (isLoading) return <LoadingIndicator />;
@@ -30,14 +32,15 @@ const App: React.FC = () => {
             show={isError}
             message="ups, something went wrong, couldn't get user details"
             action={{
-              txt: 'Retry',
+              txt: "Retry",
               fn: fetch,
-            }} />
+            }}
+          />
           {getComponent()}
         </UserContext.Provider>
       </Router>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

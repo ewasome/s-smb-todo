@@ -1,23 +1,23 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 const validate = (value, validatorList) => {
   const validationFailure = validatorList.find((validator) => {
     const { fc } = validator;
 
-    return !fc(value)
+    return !fc(value);
   });
 
   return validationFailure;
-}
+};
 
 export function useInputWithValidation(validators) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [isValid, setIsValid] = useState(null);
-  const [validationFailureMsg, setValidationFailureMsg] = useState('');
+  const [validationFailureMsg, setValidationFailureMsg] = useState("");
 
   const onChange = (event) => {
     const { value } = event.target;
-    debugger
+    debugger;
     const validatorList = [].concat(validators);
     const result = validate(value, validatorList);
 
@@ -25,7 +25,7 @@ export function useInputWithValidation(validators) {
 
     if (!result) {
       setIsValid(true);
-      setValidationFailureMsg('');
+      setValidationFailureMsg("");
       return;
     }
 

@@ -1,15 +1,15 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import breakpoints from '../styles/breakpoints';
+import breakpoints from "../styles/breakpoints";
 
-import Todo from './Todo';
-import TodoAdd from './TodoAdd';
-import { LoadingIndicator, Message } from './common';
+import Todo from "./Todo";
+import TodoAdd from "./TodoAdd";
+import { LoadingIndicator, Message } from "./common";
 
-import { useService } from '../hooks/useService';
-import { getTodoList } from '../services/todos';
+import { useService } from "../hooks/useService";
+import { getTodoList } from "../services/todos";
 
 const Main = styled.div`
   display: flex;
@@ -33,20 +33,25 @@ const Main = styled.div`
 `;
 
 const TodoList = styled.ul`
-max-width: 37rem;
-flex: 1;
-${breakpoints.device.l} {
-  margin-top: 50px;
-}
+  max-width: 37rem;
+  flex: 1;
+  ${breakpoints.device.l} {
+    margin-top: 50px;
+  }
 `;
 
 const TodoAddWrapper = styled.div`
-flex: 1;
+  flex: 1;
 `;
 
 const ListView: React.FC = () => {
   const { listId } = useParams();
-  const { data: list = {}, isError, isLoading, fetch: refetch } = useService(getTodoList, { lazy: false, args: [listId] });
+  const {
+    data: list = {},
+    isError,
+    isLoading,
+    fetch: refetch,
+  } = useService(getTodoList, { lazy: false, args: [listId] });
   const { items, id } = list;
 
   // if there is no such list in store
@@ -64,9 +69,10 @@ const ListView: React.FC = () => {
         show={isError}
         message="ups, something went wrong, couldn't get list of todos"
         action={{
-          txt: 'Retry',
+          txt: "Retry",
           fn: refetch,
-        }} />
+        }}
+      />
       <Main>
         <TodoAddWrapper>
           <h4>Add a new item</h4>
@@ -75,13 +81,18 @@ const ListView: React.FC = () => {
         <TodoList>
           {items?.map((todo) => (
             <li key={todo.id}>
-              <Todo onRemove={refetch} listId={listId} id={todo.id} details={todo} />
+              <Todo
+                onRemove={refetch}
+                listId={listId}
+                id={todo.id}
+                details={todo}
+              />
             </li>
           ))}
         </TodoList>
       </Main>
     </>
-  )
-}
+  );
+};
 
 export default ListView;

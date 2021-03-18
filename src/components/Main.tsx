@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import ListTabs from './ListTabs';
-import ListView from './ListView';
+import ListTabs from "./ListTabs";
+import ListView from "./ListView";
 
 const Main: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const Main: React.FC = () => {
       <ListTabs />
       <ListView />
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

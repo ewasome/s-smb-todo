@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 const rotate = keyframes`
   from {
@@ -12,22 +12,25 @@ const rotate = keyframes`
 `;
 
 const Rotate = styled.div`
-text-align: center;
-padding: 2rem;
-span {
-  border: 16px solid var(--color-blue-0);
-  border-top: 16px solid var(--color-green);
-  border-radius: 50%;
-  width: 7.5rem;
-  height: 7.5rem;
-  animation: ${rotate} 2s linear infinite;
-  display: inline-block;
-}
+  text-align: center;
+  padding: 2rem;
+  span {
+    border: 16px solid var(--color-blue-0);
+    border-top: 16px solid var(--color-green);
+    border-radius: 50%;
+    width: 7.5rem;
+    height: 7.5rem;
+    animation: ${rotate} 2s linear infinite;
+    display: inline-block;
+  }
 `;
 
 const LoadingIndicator = () => {
-  return <Rotate><span /></Rotate>;
+  return (
+    <Rotate>
+      <span />
+    </Rotate>
+  );
 };
 
 export default LoadingIndicator;
-

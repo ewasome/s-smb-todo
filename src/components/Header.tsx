@@ -1,14 +1,18 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import breakpoints from '../styles/breakpoints';
+import breakpoints from "../styles/breakpoints";
 
-import logo from 'url:../assets/logo.png';
-import { UserContext } from './context';
+import logo from "url:../assets/logo.png";
+import { UserContext } from "./context";
 
 const Container = styled.header`
-  background-image: linear-gradient(to right bottom, var(--color-purple-2), var(--color-purple-3));
+  background-image: linear-gradient(
+    to right bottom,
+    var(--color-purple-2),
+    var(--color-purple-3)
+  );
   color: var(--color-white);
   display: flex;
   justify-content: space-between;
@@ -31,19 +35,18 @@ const Logo = styled.img`
 
 const Header: React.FC = () => {
   const user = useContext(UserContext);
-  const splitedName = user?.name?.split(' ');
+  const splitedName = user?.name?.split(" ");
   // display only first name and title
-  const userDisplay = splitedName?.splice(0, splitedName.length - 1).join(' ');
+  const userDisplay = splitedName?.splice(0, splitedName.length - 1).join(" ");
   return (
     <Container>
       <Link to="/">
         <Logo src={logo} />
       </Link>
       {/* display only if user data are retrieved */}
-      {userDisplay && <span>Hello {userDisplay}</span>
-      }
+      {userDisplay && <span>Hello {userDisplay}</span>}
     </Container>
-  )
-}
+  );
+};
 
 export default Header;

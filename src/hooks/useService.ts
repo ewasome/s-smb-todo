@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { isFunction } from "lodash";
 
-import useMemoizedValue from './useMemoizedValue';
+import useMemoizedValue from "./useMemoizedValue";
 
 export const useService = (service, options = {}) => {
   const { lazy = false, onCompleted, args = [] } = options;

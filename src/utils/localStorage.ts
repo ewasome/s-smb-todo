@@ -1,5 +1,5 @@
 export function getFromStorage(key) {
-  return JSON.parse(localStorage.getItem(key))
+  return JSON.parse(localStorage.getItem(key));
 }
 
 export function setInStorage(key, data) {
@@ -10,7 +10,7 @@ export function updateStorage(key, data) {
   if (!Object.keys(data).length) {
     localStorage.removeItem(key);
   }
-  setInStorage(key, { ...getFromStorage(key), ...data })
+  setInStorage(key, { ...getFromStorage(key), ...data });
 }
 
 export default {

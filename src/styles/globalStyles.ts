@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import { getCssVariabled } from './colorPalette';
+import { createGlobalStyle } from "styled-components";
+import { getCssVariabled } from "./colorPalette";
 
 const GlobalStyle = createGlobalStyle`
   :root {

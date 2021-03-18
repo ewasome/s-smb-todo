@@ -1,10 +1,13 @@
-import LS from '../utils/localStorage';
-const STATE_KEY = 'app.state';
+import LS from "../utils/localStorage";
+const STATE_KEY = "app.state";
 
 export function getTodoLists() {
   try {
     const state = LS.get(STATE_KEY);
-    const lists = Object.keys(state).map(list => ({ name: state[list].name, id: list }));
+    const lists = Object.keys(state).map((list) => ({
+      name: state[list].name,
+      id: list,
+    }));
 
     return Promise.resolve(lists);
   } catch (err) {
@@ -15,7 +18,7 @@ export function getTodoLists() {
 export function addTodoList(name) {
   try {
     const state = LS.get(STATE_KEY);
-    const id = name.toLowerCase().trim().split(' ').join('-');
+    const id = name.toLowerCase().trim().split(" ").join("-");
     const newList = { id, name, items: [] };
     LS.set(STATE_KEY, { ...state, [id]: newList });
 
@@ -29,8 +32,8 @@ export function removeTodoList(id) {
   try {
     const state = LS.get(STATE_KEY);
     const newState = Object.keys(state).reduce((acc, key) => {
-      return id === key ? { ...acc } : { ...acc, [key]: state[key] }
-    }, {})
+      return id === key ? { ...acc } : { ...acc, [key]: state[key] };
+    }, {});
     LS.set(STATE_KEY, newState);
 
     return Promise.resolve(id);
@@ -59,7 +62,10 @@ export function addTodo(text, listId, assigneeId) {
       completed: false,
     };
     const newItems = [...state[listId].items, newItem];
-    const newState = { ...state, [listId]: { ...state[listId], items: newItems } };
+    const newState = {
+      ...state,
+      [listId]: { ...state[listId], items: newItems },
+    };
 
     LS.update(STATE_KEY, newState);
 
@@ -69,15 +75,17 @@ export function addTodo(text, listId, assigneeId) {
   }
 }
 
-
 export function toggleTodoStatus(id, listId) {
   try {
     const state = LS.get(STATE_KEY);
     const items = state[listId].items;
-    const item = items.find(item => item.id === id);
+    const item = items.find((item) => item.id === id);
     const changedItem = { ...item, completed: !item.completed };
-    const newItems = items.map(item => (item.id === id) ? changedItem : item);
-    const newState = { ...state, [listId]: { ...state[listId], items: newItems } };
+    const newItems = items.map((item) => (item.id === id ? changedItem : item));
+    const newState = {
+      ...state,
+      [listId]: { ...state[listId], items: newItems },
+    };
     LS.set(STATE_KEY, newState);
 
     return Promise.resolve(changedItem);
@@ -90,8 +98,11 @@ export function removeTodo(id, listId) {
   try {
     const state = LS.get(STATE_KEY);
     const items = state[listId].items;
-    const newItems = items.filter(item => item.id !== id);
-    const newState = { ...state, [listId]: { ...state[listId], items: newItems } };
+    const newItems = items.filter((item) => item.id !== id);
+    const newState = {
+      ...state,
+      [listId]: { ...state[listId], items: newItems },
+    };
     LS.set(STATE_KEY, newState);
 
     return Promise.resolve(id);

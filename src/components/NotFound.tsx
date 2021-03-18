@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-import { Hero, StyledLink } from './common';
-import banner from 'url:../assets/not-found.svg';
+import { Hero, StyledLink } from "./common";
+import banner from "url:../assets/not-found.svg";
 
 const NotFound: React.FC = () => {
   return (
@@ -9,11 +9,9 @@ const NotFound: React.FC = () => {
       subtitle="Got lost?"
       text="Don't worry, it happens to us all."
       banner={<img src={banner} />}
-      action={(
-        <StyledLink to="/">Go back</StyledLink>
-      )}
+      action={<StyledLink to="/">Go back</StyledLink>}
     />
-  )
-}
+  );
+};
 
 export default NotFound;

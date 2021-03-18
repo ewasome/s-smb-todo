@@ -1,35 +1,36 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
+import React, { useContext } from "react";
+import styled from "styled-components";
 
 import { toggleTodoStatus, removeTodo } from "../services/todos";
 import { getUserDetails } from "../services/users";
 import { useService } from "../hooks/useService";
 
-import iconRemove from 'url:../assets/icon-remove.svg';
-import { UserContext } from './context';
-import { FormMessage } from './common';
+import iconRemove from "url:../assets/icon-remove.svg";
+import { UserContext } from "./context";
+import { FormMessage } from "./common";
 
 const TodoContainer = styled.div`
-width: auto;
-display: grid;
-grid-gap: 1rem;
-grid-template-columns: auto 1fr auto;
-box-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px 0 #0000000f;
-background-color: ${props => props.highlighted ? "var(--color-purple-0)" : "var(--color-white)"};
-border-color: #e5e7eb;
-border-radius: 8px;
-padding: 24px;
-margin-bottom: 20px;
+  width: auto;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: auto 1fr auto;
+  box-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px 0 #0000000f;
+  background-color: ${(props) =>
+    props.highlighted ? "var(--color-purple-0)" : "var(--color-white)"};
+  border-color: #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
 `;
 
 const RemoveButton = styled.button`
-justify-self: end;
-&:hover {
-  transform: scale(0.9);
-}
-img {
-  width: 24px;
-}
+  justify-self: end;
+  &:hover {
+    transform: scale(0.9);
+  }
+  img {
+    width: 24px;
+  }
 `;
 
 const AuthorAvatar = styled.span`
@@ -91,7 +92,7 @@ span {
     position: absolute;
     font-size: 22px;
     width: 100%;
-    opacity: ${props => props.checked ? "1" : "0"};
+    opacity: ${(props) => (props.checked ? "1" : "0")};
   }
   }
 }
@@ -108,14 +109,11 @@ const Todo: React.FC = ({ listId, id, details, onRemove }) => {
 
   const { description, assignee, completed } = data;
 
-  const { isError: isErrorOnRemove, fetch: remove } = useService(
-    removeTodo,
-    {
-      lazy: true,
-      args: [id, listId],
-      onCompleted: onRemove,
-    }
-  );
+  const { isError: isErrorOnRemove, fetch: remove } = useService(removeTodo, {
+    lazy: true,
+    args: [id, listId],
+    onCompleted: onRemove,
+  });
 
   const {
     data: user = {},
@@ -123,7 +121,10 @@ const Todo: React.FC = ({ listId, id, details, onRemove }) => {
     isLoading: isLoadingOnUser,
   } = useService(getUserDetails, { lazy: false, args: [assignee] });
 
-  const displayAuthor = user?.name?.split(' ').map(part => part.charAt(0)).join('');
+  const displayAuthor = user?.name
+    ?.split(" ")
+    .map((part) => part.charAt(0))
+    .join("");
 
   if (isLoadingOnUser) {
     return null;
@@ -142,10 +143,16 @@ const Todo: React.FC = ({ listId, id, details, onRemove }) => {
         </RemoveButton>
         {!isErrorOnUser && <AuthorAvatar>{displayAuthor}</AuthorAvatar>}
       </TodoContainer>
-      {isErrorOnRemove && <FormMessage>something went wrong, couldn't remove Todo</FormMessage>}
-      {isErrorOnStatusChange && <FormMessage>something went wrong, couldn't change Todo status</FormMessage>}
+      {isErrorOnRemove && (
+        <FormMessage>something went wrong, couldn't remove Todo</FormMessage>
+      )}
+      {isErrorOnStatusChange && (
+        <FormMessage>
+          something went wrong, couldn't change Todo status
+        </FormMessage>
+      )}
     </>
-  )
-}
+  );
+};
 
 export default Todo;

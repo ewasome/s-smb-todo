@@ -1,8 +1,8 @@
 const size = {
-  s: '320px',     // phone     <600
-  m: '600px',     // tablet    600-1023
-  l: '1024px',    // desktop   1024-1439
-  xl: '1440px',   // desktop   1440-1919
+  s: "320px", // phone     <600
+  m: "600px", // tablet    600-1023
+  l: "1024px", // desktop   1024-1439
+  xl: "1440px", // desktop   1440-1919
 };
 
 const device = {
@@ -12,4 +12,4 @@ const device = {
   xl: `@media only screen and (min-width: ${size.xl})`,
 };
 
-export default { size, device }
+export default { size, device };

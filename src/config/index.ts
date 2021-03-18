@@ -1,6 +1,6 @@
 const config = {
   api: {
-    users: 'https://jsonplaceholder.typicode.com/users',
+    users: "https://jsonplaceholder.typicode.com/users",
   },
 };
 
