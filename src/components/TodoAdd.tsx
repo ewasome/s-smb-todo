@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+import { User } from '../interfaces';
+
 import breakpoints from "../styles/breakpoints";
 
 import useInputWithValidation from "../hooks/useStateWithValidation";

@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { isFunction } from "lodash";
 
+import { DataServiceOptions } from '../interfaces';
+
 import useMemoizedValue from "./useMemoizedValue";
 
 // loaded data getter, load action trigger adapter to unify different API calls
@@ -41,7 +43,7 @@ export const useService = (
   }, [service, memoArgs, memoOnCompleted]);
 
   useEffect(() => {
-    // immediated action call only on lazy flag set to true
+    // immediate action call only on lazy flag set to true
     if (lazy) return;
     fetchData();
   }, [lazy, fetchData]);

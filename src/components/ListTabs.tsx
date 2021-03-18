@@ -2,6 +2,8 @@ import React from "react";
 import { useHistory, useParams } from "react-router";
 import styled from "styled-components";
 
+import { List } from '../interfaces';
+
 import breakpoints from "../styles/breakpoints";
 
 import { Hero, Banner, Message } from "./common";
@@ -95,7 +97,7 @@ const ListTabs: React.FC = () => {
   }
   return (
     <>
-    {/* display failed fetch list message */}
+      {/* display failed fetch list message */}
       <Message
         show={isError}
         message="ups, something went wrong, couldn't get list"

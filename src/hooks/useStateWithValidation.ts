@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { InputValidator, UseStateWithValidationResult } from '../interfaces';
+
 // validate inputs value
 const validate = (value: string, validatorList: InputValidator[]) => {
   // run passed validator functions on value, return first failed validator

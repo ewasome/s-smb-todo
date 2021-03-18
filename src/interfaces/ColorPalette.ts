@@ -1,3 +1,3 @@
-interface ColorPalette {
+export interface ColorPalette {
   [key: string]: string;
 }

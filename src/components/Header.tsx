@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import { User } from '../interfaces';
+
 import breakpoints from "../styles/breakpoints";
 
 import logo from "url:../assets/logo.png";

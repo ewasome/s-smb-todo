@@ -1,4 +1,4 @@
-interface InputValidator {
+export interface InputValidator {
   msg: string;
   fn(inputState: string): boolean;
 }

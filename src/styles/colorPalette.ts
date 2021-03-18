@@ -1,3 +1,5 @@
+import { ColorPalette } from '../interfaces';
+
 const colorPalette: ColorPalette = {
   "purple-0": "#f4eff5",
   "purple-1": "#ded1e0",

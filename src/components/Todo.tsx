@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 
+import { ToDo, User } from '../interfaces';
+
 import { toggleTodoStatus, removeTodo } from "../services/todos";
 import { getUserDetails } from "../services/users";
 import { useService } from "../hooks/useService";

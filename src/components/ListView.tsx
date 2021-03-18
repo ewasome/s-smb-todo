@@ -2,6 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+import { ToDo } from '../interfaces';
+
 import breakpoints from "../styles/breakpoints";
 
 import Todo from "./Todo";

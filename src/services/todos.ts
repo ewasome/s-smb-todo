@@ -1,6 +1,8 @@
 import LS from "../utils/localStorage";
 import { v4 as generateId } from "uuid";
 
+import { List, ToDo } from '../interfaces';
+
 const STATE_KEY = "app.state";
 
 // local storage API in Promise format to fake real connection with backend

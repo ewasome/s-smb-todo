@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import breakpoints from "../styles/breakpoints";
 
+import { InputValidator } from '../interfaces';
+
 import useInputWithValidation from "../hooks/useStateWithValidation";
 import { useService } from "../hooks/useService";
 import { addTodoList } from "../services/todos";
